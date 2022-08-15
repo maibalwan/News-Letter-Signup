@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
+const api = require(__dirname + "/api-key.js");
 
 
 const app = express();
@@ -34,10 +35,11 @@ app.post("/", function(req, res) {
   };
 
   var jsonData = JSON.stringify(data);
+  let apiKey = api.getapi();
   const url = "https://us12.api.mailchimp.com/3.0/lists/b8035d36e6";
   const options = {
     method: "POST",
-    auth: "maibalwan1:75326884182fd34111b5c2fa332fc4af-us12"
+    auth: "maibalwan1:" + apiKey
   };
 
   const request = https.request(url, options, function(response) {
@@ -67,7 +69,6 @@ app.listen(process.env.PORT || 3000, function() {
   console.log("Server is running on port 3000");
 });
 
-// API Key
-// 75326884182fd34111b5c2fa332fc4af-us12
+
 
 // List  ID: b8035d36e6
